@@ -36,22 +36,18 @@ for f in content_list:
         pingoutput = p1.read()
         if 'Destination Host Unreachable' in pingoutput:
                 print("can't see remote host")
-                time.sleep(3)
+                output.write(f + ' reboot" + '\n')
+                time.sleep(60)
                 p2 = os.popen(cleanping)
                 ping2output = p2.read()
                 if 'Destination Host Unreachable' in ping2output:
-                        with open("badcmdlist.txt", "w") as output:
-                                output.write(f)
-                                output.close()
-                                sys.exit(1)
-                
-        else:
-                print(f, "has run")
-                print(f, "HAS RUN", file=log)
+                       output.write(f + ' killed')
+                       sys.exit(1)
+         else:
+                       print(f, " has run")
+                       log.write(f + '\n')
 
-
-
-
-
-
+                             
+                          
 log.close()
+output.close()
